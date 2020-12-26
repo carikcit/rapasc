@@ -66,3 +66,44 @@ function playRound (playerSelection, computerSelection) {
 resetGame();
 
 // start game with button selection, playerSelection = button ID
+
+function checkWinner() {
+    if (compScore == 5 && playerScore == 5) {
+      roundResults.textContent = "The game is a Tie!";
+      roundResults.style.color ='blue';
+       optionBtn.forEach(button => {
+       button.removeEventListener('click', getPlayerChoice);
+     });
+    }else if (compScore == 5) {
+       roundResults.textContent = "You Lost the game to a computer!";
+       roundResults.style.color ='red';
+        optionBtn.forEach(button => {
+        button.removeEventListener('click', getPlayerChoice);
+      });
+    }else if (playerScore == 5) {
+      roundResults.textContent =  "You Win the game!!!!";
+      roundResults.style.color ='green';
+       optionBtn.forEach(button => {
+       button.removeEventListener('click', getPlayerChoice);
+     });
+    }
+  }
+    
+  function resetGame() {
+    resetBtn.addEventListener('click',() => 
+      location.reload());
+  }
+    
+  
+  function startGame() {
+    optionBtn.forEach(button => {
+      button.addEventListener('click', getPlayerChoice);
+    });
+  }
+  
+  
+  
+  function getPlayerChoice(e) {
+    playerSelection = (e.target.id)
+    playRound(playerSelection, computerPlay());
+  }
